@@ -12,8 +12,10 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { useState } from 'react'
-import { supabase } from '../hooks/supabaseClient'
+import { domAnimation } from 'framer-motion';
+import { useState } from 'react';
+import { supabase } from '../hooks/supabaseClient';
+import { Link as ReactLink } from 'react-router-dom';
 
 export default function Login() {
 
@@ -98,7 +100,7 @@ export default function Login() {
             </Stack>
             <Stack pt={6}>
               <Text align={'center'}>
-                Need an account? <Link to="/signup" color={'blue.400'}>Register</Link>
+                Need an account? <Link as={ReactLink} to="/Signup" color={'blue.400'}>Register</Link>
               </Text>
             </Stack>
           </Stack>
