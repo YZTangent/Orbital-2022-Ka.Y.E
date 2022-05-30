@@ -23,25 +23,21 @@ function useProvideAuth() {
     // Wrap any Firebase methods we want to use making sure ...
     // ... to save the user to state.
     const signin = async (email, password) => {
-        alert("2")
         await supabase
             .auth
             .signIn({ email, password })
-        // alert(email+password)
             .then((response) => {
                 alert(email+password)
                 setUser(response.user)
                 alert(user)
             });
-            
     };
-    const signup = (email, password) => {
-        return supabase
+    const signup = async (email, password) => {
+        await supabase
             .auth
             .signUp({ email, password })
             .then((response) => {
                 setUser(response.user);
-                return response.user;
             });
     };
     /*
