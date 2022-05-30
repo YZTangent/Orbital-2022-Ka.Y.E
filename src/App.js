@@ -10,11 +10,11 @@ import {
   Route,
   Redirect
 } from "react-router-dom";  
-import { AuthProvider } from './hooks/AuthProvider';
+import { ProvideAuth } from './hooks/ProvideAuth';
 
 function App() {
   return (
-    <AuthProvider>
+    <ProvideAuth>
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -22,7 +22,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
         </Routes>
       </Router>
-    </AuthProvider>
+    </ProvideAuth>
   );
 }
 

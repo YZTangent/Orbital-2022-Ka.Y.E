@@ -12,31 +12,40 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { domAnimation } from 'framer-motion';
 import { useState } from 'react';
 import { supabase } from '../hooks/supabaseClient';
+import { useAuth } from '../hooks/ProvideAuth';
 import { Link as ReactLink } from 'react-router-dom';
 
 export default function Login() {
 
-//  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  async function signInWithGoogle() {
-    const { user, session, error } = await supabase.auth.signIn({
-      provider: 'google',
+  // Get auth state and re-render anytime it changes
+  const auth = useAuth();
+
+  async function signInWithEmail() {
+    const { user, error } = await supabase.auth.signIn({
+      email,
+      password,
     })
   }
 
+  
   const handleLogin = async (e) => {
     e.preventDefault()
 
-    async function signInWithEmail() {
-      const { user, error } = await supabase.auth.signIn({
-        email,
-        password,
-      })
+    try {
+      setLoading(true)
+      const { error } = await supabase.auth.signIn({ email, password })
+      if (error) throw error
+      alert('Check your email for the login link!')
+    } catch (error) {
+      alert(error.error_description || error.message)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -84,7 +93,11 @@ export default function Login() {
                 <Link color={'blue.400'}>Forgot password?</Link>
               </Stack>
               <Button
-                onClick={handleLogin}
+                onClick={
+                  // () =>{auth.signin(email, password)}
+                  // signInWithEmail
+                  handleLogin
+                }
                 bg={'blue.400'}
                 color={'white'}
                 _hover={{
