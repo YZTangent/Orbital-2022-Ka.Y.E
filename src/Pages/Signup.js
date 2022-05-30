@@ -20,7 +20,20 @@ import {
   import { Link as ReactLink } from 'react-router-dom';
   
   export default function SignupCard() {
+
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const handleSignup = async (e) => {
+      e.preventDefault()
+  
+      const { user, session, error } = await supabase.auth.signUp({
+        email,
+        password
+      })
+    }
+
   
     return (
       <Flex
@@ -45,7 +58,7 @@ import {
             <Stack spacing={4}>
               <HStack>
                 <Box>
-                  <FormControl id="firstName" isRequired>
+                  <FormControl id="firstName">
                     <FormLabel>First Name</FormLabel>
                     <Input type="text" />
                   </FormControl>
@@ -59,12 +72,20 @@ import {
               </HStack>
               <FormControl id="email" isRequired>
                 <FormLabel>Email address</FormLabel>
-                <Input type="email" />
+                <Input 
+                  type="email" 
+                  placeholder="Your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)} />
               </FormControl>
               <FormControl id="password" isRequired>
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
-                  <Input type={showPassword ? 'text' : 'password'} />
+                  <Input 
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Your Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)} />
                   <InputRightElement h={'full'}>
                     <Button
                       variant={'ghost'}
@@ -78,6 +99,7 @@ import {
               </FormControl>
               <Stack spacing={10} pt={2}>
                 <Button
+                  onClick={handleSignup}
                   loadingText="Submitting"
                   size="lg"
                   bg={'blue.400'}
@@ -90,7 +112,7 @@ import {
               </Stack>
               <Stack pt={6}>
                 <Text align={'center'}>
-                  Already a user? <Link as={ReactLink} to="/Login" color={'blue.400'}>Login</Link>
+                  Already a user? <Link as={ReactLink} to="/login" color={'blue.400'}>Login</Link>
                 </Text>
               </Stack>
             </Stack>

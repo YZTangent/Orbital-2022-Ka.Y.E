@@ -19,7 +19,7 @@ import { Link as ReactLink } from 'react-router-dom';
 
 export default function Login() {
 
-  const [loading, setLoading] = useState(false)
+//  const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -32,15 +32,11 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault()
 
-    try {
-      setLoading(true)
-      const { error } = await supabase.auth.signIn({ email, password })
-      if (error) throw error
-      alert('Check your email for the login link!')
-    } catch (error) {
-      alert(error.error_description || error.message)
-    } finally {
-      setLoading(false)
+    async function signInWithEmail() {
+      const { user, error } = await supabase.auth.signIn({
+        email,
+        password,
+      })
     }
   }
 
@@ -63,7 +59,7 @@ export default function Login() {
           boxShadow={'lg'}
           p={8}>
           <Stack spacing={4}>
-            <FormControl id="email">
+            <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
               <Input 
                 type="email" 
@@ -71,7 +67,7 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)} />
             </FormControl>
-            <FormControl id="password">
+            <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <Input 
                 type="password" 
@@ -100,7 +96,7 @@ export default function Login() {
             </Stack>
             <Stack pt={6}>
               <Text align={'center'}>
-                Need an account? <Link as={ReactLink} to="/Signup" color={'blue.400'}>Register</Link>
+                Need an account? <Link as={ReactLink} to="/signup" color={'blue.400'}>Register</Link>
               </Text>
             </Stack>
           </Stack>
