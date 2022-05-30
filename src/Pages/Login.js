@@ -13,41 +13,16 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { supabase } from '../config/supabaseClient';
 import { useAuth } from '../hooks/ProvideAuth';
 import { Link as ReactLink } from 'react-router-dom';
 
 export default function Login() {
 
-  const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   // Get auth state and re-render anytime it changes
   const { signin } = useAuth();
-
-  async function signInWithEmail() {
-    const { user, error } = await supabase.auth.signIn({
-      email,
-      password,
-    })
-  }
-
-  
-  const handleLogin = async (e) => {
-    e.preventDefault()
-
-    try {
-      setLoading(true)
-      const { error } = await supabase.auth.signIn({ email, password })
-      if (error) throw error
-      alert('Check your email for the login link!')
-    } catch (error) {
-      alert(error.error_description || error.message)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   return (
     <Flex
@@ -93,11 +68,7 @@ export default function Login() {
                 <Link color={'blue.400'}>Forgot password?</Link>
               </Stack>
               <Button
-                onClick={
-                  () =>{alert("1"); signin(email, password)}
-                  // signInWithEmail
-                  // handleLogin
-                }
+                onClick={() =>signin(email, password)}
                 bg={'blue.400'}
                 color={'white'}
                 _hover={{

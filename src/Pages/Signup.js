@@ -16,7 +16,7 @@ import {
   } from '@chakra-ui/react';
   import { useState } from 'react';
   import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-  import { supabase } from '../config/supabaseClient'
+  import { useAuth } from '../hooks/ProvideAuth';
   import { Link as ReactLink } from 'react-router-dom';
   
   export default function SignupCard() {
@@ -25,15 +25,8 @@ import {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleSignup = async (e) => {
-      e.preventDefault()
-  
-      const { user, session, error } = await supabase.auth.signUp({
-        email,
-        password
-      })
-    }
-
+    // Get auth state and re-render anytime it changes
+    const { signup } = useAuth();
   
     return (
       <Flex
@@ -99,7 +92,7 @@ import {
               </FormControl>
               <Stack spacing={10} pt={2}>
                 <Button
-                  onClick={handleSignup}
+                  onClick={() =>signup(email, password)}
                   loadingText="Submitting"
                   size="lg"
                   bg={'blue.400'}

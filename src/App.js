@@ -1,18 +1,21 @@
 import './App.css';
 import Login from './Pages/Login'
 import Signup from'./Pages/Signup'
-import { useState } from 'react'
-import { Input } from '@chakra-ui/react'
-import { Button, ButtonGroup } from '@chakra-ui/react'
+import Dashboard from'./Pages/Dashboard'
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Redirect
 } from "react-router-dom";  
-import { ProvideAuth } from './hooks/ProvideAuth';
+import { ProvideAuth, useAuth } from './hooks/ProvideAuth';
 
 function App() {
+
+ const auth = useAuth();
+
+//  const user = auth.user;
+
   return (
     <ProvideAuth>
       <Router>
