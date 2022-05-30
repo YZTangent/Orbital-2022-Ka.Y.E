@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { supabase } from '../hooks/supabaseClient';
+import { supabase } from '../config/supabaseClient';
 import { useAuth } from '../hooks/ProvideAuth';
 import { Link as ReactLink } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ export default function Login() {
   const [password, setPassword] = useState('')
 
   // Get auth state and re-render anytime it changes
-  const auth = useAuth();
+  const { signin } = useAuth();
 
   async function signInWithEmail() {
     const { user, error } = await supabase.auth.signIn({
@@ -94,9 +94,9 @@ export default function Login() {
               </Stack>
               <Button
                 onClick={
-                  // () =>{auth.signin(email, password)}
+                  () =>{alert("1"); signin(email, password)}
                   // signInWithEmail
-                  handleLogin
+                  // handleLogin
                 }
                 bg={'blue.400'}
                 color={'white'}

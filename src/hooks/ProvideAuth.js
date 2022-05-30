@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
-import { supabase } from './supabaseClient';
+import { supabase } from '../config/supabaseClient';
 
 const authContext = createContext();
 
@@ -18,23 +18,22 @@ export const useAuth = () => {
 
 // Provider hook that creates auth object and handles state
 function useProvideAuth() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
 
     // Wrap any Firebase methods we want to use making sure ...
     // ... to save the user to state.
-    const signin = (e) => {
-        e.preventDefault()
-        
-        const inner = async (email, password) => {
+    const signin = async (email, password) => {
+        alert("2")
         await supabase
             .auth
             .signIn({ email, password })
+        // alert(email+password)
             .then((response) => {
-                setUser(response.user);
-                return response.user;
+                alert(email+password)
+                setUser(response.user)
+                alert(user)
             });
-        }
-        inner();
+            
     };
     const signup = (email, password) => {
         return supabase
@@ -45,7 +44,6 @@ function useProvideAuth() {
                 return response.user;
             });
     };
-
     /*
     const signinwithgoogle = () => {
         return supabase

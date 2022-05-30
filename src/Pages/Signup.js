@@ -16,7 +16,7 @@ import {
   } from '@chakra-ui/react';
   import { useState } from 'react';
   import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-  import { supabase } from '../hooks/supabaseClient'
+  import { supabase } from '../config/supabaseClient'
   import { Link as ReactLink } from 'react-router-dom';
   
   export default function SignupCard() {
