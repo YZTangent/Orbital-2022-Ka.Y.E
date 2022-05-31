@@ -27,9 +27,8 @@ function useProvideAuth() {
             .auth
             .signIn({ email, password })
             .then((response) => {
-                alert(email+password)
-                setUser(response.user)
-                alert(user)
+                setUser(response.user);
+                // alert(user); // displays null even when login is successful and user is not null? not sure why
             });
     };
     const signup = async (email, password) => {

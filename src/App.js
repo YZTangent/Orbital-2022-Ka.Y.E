@@ -8,24 +8,20 @@ import {
   Route,
   Redirect
 } from "react-router-dom";  
-import { ProvideAuth, useAuth } from './hooks/ProvideAuth';
+import { useAuth } from './hooks/ProvideAuth';
 
 function App() {
 
- const auth = useAuth();
-
-//  const user = auth.user;
+  const { user }  = useAuth();
 
   return (
-    <ProvideAuth>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </Router>
-    </ProvideAuth>
+    <Router>
+      <Routes>
+        <Route path="/" element={user ? <Dashboard /> : <Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+    </Router>
   );
 }
 
