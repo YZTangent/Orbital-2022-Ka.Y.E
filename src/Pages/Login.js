@@ -11,6 +11,7 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  Tooltip,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useAuth } from '../hooks/ProvideAuth';
@@ -67,22 +68,38 @@ export default function Login() {
                 <Checkbox>Remember me</Checkbox>
                 <Link color={'blue.400'}>Forgot password?</Link>
               </Stack>
-              <Button
-                onClick={() =>signin(email, password)}
-                bg={'blue.400'}
-                color={'white'}
-                _hover={{
-                  bg: 'blue.500',
-                }}
-                on>
-                Sign in
-              </Button>
-            </Stack>
+                <Tooltip 
+                  Label='Email: testing@test \nPassword:testaccount1 \nAlternatively, you can make your own account at the sign up page :)' >
+                  <Button
+                    onClick={() =>signin(email, password)}
+                    bg={'blue.400'}
+                    color={'white'}
+                    _hover={{
+                      bg: 'blue.500',
+                    }}
+                    on>
+                    Sign in
+                  </Button>
+                </Tooltip>
+              </Stack>
             <Stack pt={6}>
               <Text align={'center'}>
                 Need an account? <Link as={ReactLink} to="/signup" color={'blue.400'}>Register</Link>
               </Text>
             </Stack>
+          </Stack>
+        </Box>
+        <Box
+          rounded={'lg'}
+          bg={useColorModeValue('white', 'gray.700')}
+          boxShadow={'lg'}
+          p={8}>
+          <Stack spacing={4}>
+            <Text align={'center'}>
+              Email: testing@test
+              <br /> Password:testaccount1 
+              <br /> Alternatively, you can make your own account at the sign up page :)
+            </Text>
           </Stack>
         </Box>
       </Stack>
