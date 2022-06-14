@@ -12,15 +12,25 @@ import {
   Text,
   useColorModeValue,
   Tooltip,
+  Center
 } from '@chakra-ui/react';
+//import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
 import { useAuth } from '../hooks/ProvideAuth';
 import { Link as ReactLink } from 'react-router-dom';
+import { supabase } from '../config/supabaseClient';
 
 export default function Login() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  
+
+  async function signInWithGoogle() {
+    const { user, session, error } = await supabase.auth.signIn({
+      provider: 'google',
+    })
+  }
 
   // Get auth state and re-render anytime it changes
   const { signin } = useAuth();
@@ -101,6 +111,15 @@ export default function Login() {
               <br /> Alternatively, you can make your own account at the sign up page :)
             </Text>
           </Stack>
+          <Button
+            w={'full'}
+            variant={'outline'}
+            // leftIcon={<FcGoogle />}
+            onClick={() => signInWithGoogle()}>
+          <Center>
+            <Text>Sign in with Google</Text>
+          </Center>
+          </Button>
         </Box>
       </Stack>
     </Flex>
