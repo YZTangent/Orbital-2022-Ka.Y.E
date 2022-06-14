@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import {
   Box,
   Flex,
@@ -17,6 +17,7 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { supabase } from '../config/supabaseClient';
 import { useAuth } from '../hooks/ProvideAuth';
 
 const Links = ['Dashboard', 'Projects', 'Team'];
@@ -36,10 +37,25 @@ const NavLink = ({ children }) => (
   </Link>
 );
 
+
+
 export default function Dashboard() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user, signOut } = useAuth();
   console.log(user)
+  const [uid, setUID] = useState('')
+
+  const getUserID = async () => {
+    console.log('here');
+    let { data: profile, error } = await supabase
+    .from('profile')
+    .select('id');
+    setUID(profile);
+    console.log(profile);
+  }
+  const the = 'test';
+  // getUserID();
+  
 
   return (
     <>
@@ -99,7 +115,7 @@ export default function Dashboard() {
         ) : null}
       </Box>
 
-      <Box p={4}>Main Content Here</Box>
+      <Box p={4}>Signed in as {user.email}</Box>
     </>
   );
 }

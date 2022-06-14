@@ -9,6 +9,11 @@ http://app.acfacility.xyz/
 Email: testing@test
 Password: testaccount1
 
+## Known issues
+
+- App does not redirect to user page after signup
+  - Signing in on the login page correctly redirects to dashboard page though
+
 ## Motivation
 
 Our motivation for our project stems from problems we face in our daily lives.
