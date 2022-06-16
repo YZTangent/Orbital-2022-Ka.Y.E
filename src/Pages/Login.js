@@ -15,21 +15,30 @@ import {
   Center
 } from '@chakra-ui/react';
 //import { FcGoogle } from 'react-icons/fc';
-import { useState } from 'react';
+import { 
+  useState,
+  useCallback
+} from 'react';
 import { useAuth } from '../hooks/ProvideAuth';
-import { Link as ReactLink } from 'react-router-dom';
+import {
+  Link as ReactLink,
+  useLocation,
+  useNavigate
+} from 'react-router-dom';
 import { supabase } from '../config/supabaseClient';
 
 export default function Login() {
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const toDashboard = useCallback(() => navigate('/dashboard', {replace: true}), [navigate]);
   
 
   async function signInWithGoogle() {
     const { user, session, error } = await supabase.auth.signIn({
       provider: 'google',
     })
+    // if user, then redirect
   }
 
   // Get auth state and re-render anytime it changes
@@ -81,7 +90,10 @@ export default function Login() {
                 <Tooltip 
                   Label='Email: testing@test \nPassword:testaccount1 \nAlternatively, you can make your own account at the sign up page :)' >
                   <Button
-                    onClick={() =>signin(email, password)}
+                    onClick={() => {
+                        signin(email, password);
+                      }
+                    }
                     bg={'blue.400'}
                     color={'white'}
                     _hover={{
@@ -115,7 +127,7 @@ export default function Login() {
             w={'full'}
             variant={'outline'}
             // leftIcon={<FcGoogle />}
-            onClick={() => signInWithGoogle()}>
+            onClick={() => {signInWithGoogle();}}>
           <Center>
             <Text>Sign in with Google</Text>
           </Center>
