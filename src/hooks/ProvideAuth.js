@@ -36,6 +36,9 @@ function useProvideAuth() {
             .auth
             .signUp({ email, password })
             .then((response) => {
+                if (response.error) {
+                    alert(response.error.message);
+                }
                 setUser(response.user);
             });
     };
