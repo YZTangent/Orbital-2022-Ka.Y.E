@@ -12,7 +12,19 @@ Password: testaccount1
 ## Known issues
 
 - App does not redirect to user page after signup
-  - Signing in on the login page correctly redirects to dashboard page though
+  - Signing in on the root page correctly redirects to dashboard page though
+- App does not check for existing users during signup
+
+## To-do
+- [ ] Set a redirect under the signUp function in ProvideAuth when response.user is not null
+- [ ] Connections registration feature + Connections page
+  - [ ] Button that appears if there is no entry in the user's table for an external account
+  - [ ] A button to unlink otherwise
+- [x] Front page
+- [ ] Persistent Login State
+- [ ] Check for existing users during signup
+- [ ] Redirect to user page after signup
+- [ ] 
 
 ## Motivation
 

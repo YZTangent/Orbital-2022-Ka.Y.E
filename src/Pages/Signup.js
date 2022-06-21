@@ -92,7 +92,7 @@ import {
               </FormControl>
               <Stack spacing={10} pt={2}>
                 <Button
-                  onClick={() =>signup(email, password)}
+                  onClick={() => signup(email, password)}
                   loadingText="Submitting"
                   size="lg"
                   bg={'blue.400'}
