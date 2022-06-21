@@ -21,10 +21,30 @@ Password: testaccount1
   - [ ] Button that appears if there is no entry in the user's table for an external account
   - [ ] A button to unlink otherwise
 - [x] Front page
+- [x] Correctly redirect to dashboard from login
 - [ ] Persistent Login State
-- [ ] Check for existing users during signup
+- [x] Check for existing users during signup
 - [ ] Redirect to user page after signup
-- [ ] 
+- [x] Redirect to login if dashboard is accessed while unauthenticated
+
+## Questions
+- [ ] What does useContext do?
+- [ ] What is the best way to create persisting authentication states?
+
+## Meeting  16/6/2022
+- Cookies
+  - Credentials sent to back end to authenticate
+  - Server sends a token back as a cookie for the client
+  - Cookie is stored in browser cookies, which is sent back to server when needed
+- There are libraries for tokens
+- Suggestions
+  - Consolidate logic in one place
+    - Bots talk to the webapp, where the logic is
+    - Information returns to all three frontends
+
+## Milestone 2
+- [ ] Create Events on all three frontends
+- [ ] RSVP from all frontends
 
 ## Motivation
 
