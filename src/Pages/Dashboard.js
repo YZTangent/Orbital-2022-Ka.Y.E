@@ -77,7 +77,7 @@ export default function Dashboard() {
     const { data, error } = await supabase
       .from('RSVP')
       .select(`
-        id,
+        eventID,
         avail,
         event (
           activity
@@ -116,8 +116,8 @@ export default function Dashboard() {
         // .map(y => [y["eventname"], y["eventID"], y["avail"]]))
         .map(y => {
           return y["avail"] === true
-            ? [y["event"]["activity"], y["id"], "Yes"]
-            : [y["event"]["activity"], y["id"], "No"];
+            ? [y["event"]["activity"], y["eventID"], "Yes"]
+            : [y["event"]["activity"], y["eventID"], "No"];
         })
       )
       // .then(console.log('this is x'))
