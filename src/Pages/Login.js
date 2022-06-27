@@ -39,8 +39,9 @@ function LoginPage() {
 
   async function signInWithGoogle() {
     const { user, session, error } = await supabase.auth.signIn({
-      provider: 'google',
-    })
+      provider: 'google'}, {
+        redirectTo: 'http://app.acfacility.xyz/dashboard'
+      })
     // if user, then redirect
   }
 
