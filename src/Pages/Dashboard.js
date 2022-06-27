@@ -69,7 +69,7 @@ export default function Dashboard() {
   const [table, setTable] = useState(
 
   );
-  const tableHeadings = ["Event", "Event ID", "Available"];
+  const tableHeadings = ["Event", "Event ID", "Scheduled at", "Available"];
 
   const getEvents = async () => {
     console.log("getEvents() was called");
@@ -80,7 +80,8 @@ export default function Dashboard() {
         eventID,
         avail,
         event (
-          activity
+          activity,
+          starttime
         )`);
     console.log('results of getRSVP');
     console.log(data);
@@ -116,8 +117,8 @@ export default function Dashboard() {
         // .map(y => [y["eventname"], y["eventID"], y["avail"]]))
         .map(y => {
           return y["avail"] === true
-            ? [y["event"]["activity"], y["eventID"], "Yes"]
-            : [y["event"]["activity"], y["eventID"], "No"];
+            ? [y["event"]["activity"], y["eventID"], y["event"]["starttime"], "Yes"]
+            : [y["event"]["activity"], y["eventID"], y["event"]["starttime"], "No"];
         })
       )
       // .then(console.log('this is x'))
@@ -236,6 +237,7 @@ export default function Dashboard() {
               <Td key={row[0]}> {row[0]} </Td>
               <Td key={row[1]}> {row[1]} </Td>
               <Td key={row[2]}> {row[2]} </Td>
+              <Td key={row[3]}> {row[3]} </Td>
             </Tr>
         ))
       }
