@@ -69,7 +69,7 @@ export default function Dashboard() {
   const [table, setTable] = useState(
 
   );
-  const tableHeadings = ["Event ID", "Available"];
+  const tableHeadings = ["Event", "Event ID", "Available"];
 
   const getEvents = async () => {
     console.log("getEvents() was called");
@@ -116,8 +116,8 @@ export default function Dashboard() {
         // .map(y => [y["eventname"], y["eventID"], y["avail"]]))
         .map(y => {
           return y["avail"] === true
-            ? [y["event"]["activity"], "Yes"]
-            : [y["event"]["activity"], "No"];
+            ? [y["event"]["activity"], y["id"], "Yes"]
+            : [y["event"]["activity"], y["id"], "No"];
         })
       )
       // .then(console.log('this is x'))
@@ -235,6 +235,7 @@ export default function Dashboard() {
             <Tr> 
               <Td key={row[0]}> {row[0]} </Td>
               <Td key={row[1]}> {row[1]} </Td>
+              <Td key={row[2]}> {row[2]} </Td>
             </Tr>
         ))
       }
@@ -252,10 +253,10 @@ export default function Dashboard() {
    </Table>
   </TableContainer>
       <div>
-      <p>You clicked {count} times</p>
+      <p>You refreshed {count} times</p>
       <p>Loading status: {loading ? "True" : "False"}</p>
       <button onClick={() => setCount(count + 1)}>
-        Click me
+        Click me to refresh
       </button>
     </div>
     </>
