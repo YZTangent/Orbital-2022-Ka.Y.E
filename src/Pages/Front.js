@@ -31,9 +31,9 @@ import { useAuth } from '../hooks/ProvideAuth';
             fontWeight={600}
             fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
             lineHeight={'110%'}>
-            I'm fucking failing{' '}
+            Project{' '}
             <Text as={'span'} color={'orange.400'}>
-              Project Orbital
+              Orbital
             </Text>
           </Heading>
           <Text color={'gray.500'} maxW={'3xl'}>
