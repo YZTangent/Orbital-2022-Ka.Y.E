@@ -12,7 +12,50 @@ Password: testaccount1
 ## Known issues
 
 - App does not redirect to user page after signup
-  - Signing in on the login page correctly redirects to dashboard page though
+  - Signing in on the root page correctly redirects to dashboard page though
+- App does not check for existing users during signup
+
+
+## To-do
+- [ ] Set a redirect under the signUp function in ProvideAuth when response.user is not null
+- [ ] Connections registration feature + Connections page
+  - [ ] Button that appears if there is no entry in the user's table for an external account
+  - [ ] A button to unlink otherwise  
+- [x] Front page (Jun 16, 2022)
+- [x] Correctly redirect to dashboard from login (Jun 21, 2022)
+- [ ] Persistent Login State
+- [x] Check for existing users during signup (Jun 21, 2022)
+- [ ] Redirect to user page after signup
+- [x] Redirect to login if dashboard is accessed while unauthenticated
+- [x] Event list on dashboard (Jun 28, 2022)
+
+## Questions
+- [ ] What is the best way to create persisting authentication states?
+  - [ ] JSON Web Tokens? Axios library?
+    - [ ] How to use Axios library?
+  - [ ] Google sign-in redirects back to a url with an access token
+    - [ ] How to use this?
+
+## Meeting  16/6/2022
+- Cookies
+  - Credentials sent to back end to authenticate
+  - Server sends a token back as a cookie for the client
+  - Cookie is stored in browser cookies, which is sent back to server when needed
+- There are libraries for tokens
+- Suggestions
+  - Consolidate logic in one place
+    - Bots talk to the webapp, where the logic is
+    - Information returns to all three frontends
+
+## Milestone 2
+- [ ] Create Events on all three frontends
+  - [ ] Webapp
+  - [x] Discord (Jun 26, 2022)
+  - [x] Telegram (Jun 26, 2022)
+- [ ] RSVP from all frontends
+  - [ ] Webapp
+  - [x] Discord (Jun 26, 2022)
+  - [x] Telegram (Jun 26, 2022)
 
 ## Motivation
 

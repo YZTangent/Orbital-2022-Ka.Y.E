@@ -36,8 +36,19 @@ function useProvideAuth() {
             .auth
             .signUp({ email, password })
             .then((response) => {
+                if (response.error) {
+                    alert(response.error.message);
+                }
                 setUser(response.user);
             });
+    };
+    const signOut = () => {
+        return supabase
+        .auth
+        .signOut()
+        .then(() => {
+            setUser(false);
+        });
     };
     /*
     const signinwithgoogle = () => {
@@ -49,14 +60,7 @@ function useProvideAuth() {
             return response.user;
         });
     };
-    const signout = () => {
-        return supabase
-        .auth
-        .signOut()
-        .then(() => {
-            setUser(false);
-        });
-    };
+    
     const sendPasswordResetEmail = (email) => {
         return supabase
         .auth
@@ -100,6 +104,7 @@ function useProvideAuth() {
         user,
         signin,
         signup,
+        signOut
         /*
         signout,
         sendPasswordResetEmail,
