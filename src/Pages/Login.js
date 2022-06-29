@@ -92,8 +92,6 @@ function LoginPage() {
                   <Checkbox>Remember me</Checkbox>
                   <Link color={'blue.400'}>Forgot password?</Link>
                 </Stack>
-                  <Tooltip 
-                    Label='Email: testing@test \nPassword:testaccount1 \nAlternatively, you can make your own account at the sign up page :)' >
                     <Button
                       onClick={() => {
                           signin(email, password);
@@ -107,7 +105,15 @@ function LoginPage() {
                       on>
                       Sign in
                     </Button>
-                  </Tooltip>
+                    <Button
+                      w={'full'}
+                      variant={'outline'}
+                      // leftIcon={<FcGoogle />}
+                      onClick={signInWithGoogle}>
+                      <Center>
+                        <Text>Sign in with Google</Text>
+                      </Center>
+                    </Button>
                 </Stack>
               <Stack pt={6}>
                 <Text align={'center'}>
@@ -128,15 +134,6 @@ function LoginPage() {
                 <br /> Alternatively, you can make your own account at the sign up page :)
               </Text>
             </Stack>
-            <Button
-              w={'full'}
-              variant={'outline'}
-              // leftIcon={<FcGoogle />}
-              onClick={signInWithGoogle}>
-            <Center>
-              <Text>Sign in with Google</Text>
-            </Center>
-            </Button>
           </Box>
         </Stack>
       </Flex>

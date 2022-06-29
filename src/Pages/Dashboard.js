@@ -30,7 +30,7 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { supabase } from '../config/supabaseClient';
 import { useAuth } from '../hooks/ProvideAuth';
 
-const Links = ['Dashboard', 'Projects', 'Team'];
+const Links = ['Dashboard', 'Create Event'];
 
 
 
