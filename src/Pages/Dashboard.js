@@ -25,11 +25,14 @@ import {
   TableCaption,
   TableContainer
 } from '@chakra-ui/react';
+import { useNavigate } from "react-router-dom";
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { supabase } from '../config/supabaseClient';
 import { useAuth } from '../hooks/ProvideAuth';
 
 const Links = ['Dashboard', 'Projects', 'Team'];
+
+
 
 
 const NavLink = ({ children }) => (
@@ -60,6 +63,7 @@ export default function Dashboard() {
   // console.log(user);
   const [uid, setUID] = useState('');
   const [discID, setDiscID] = useState('');
+  const [username, setUsername] = useState('');
   const [count, setCount] = useState(0);
   const [eventCount, setEventCount] = useState(0);
   const [events, setEvents] = useState([["Loading Events...", "Loading Status..."]]);
@@ -82,7 +86,8 @@ export default function Dashboard() {
         event (
           activity,
           starttime
-        )`);
+        )`)
+        .eq('userID', user['id']);
     console.log('results of getRSVP');
     console.log(data);
     return data;
@@ -91,6 +96,13 @@ export default function Dashboard() {
     // return data;
   }
 
+  const get_username = async () => {
+    console.log("get_username() was called")
+    const { data, error } = await supabase
+      .from('Profile')
+      .select('username')
+    return data[0]["username"];
+  }
 
   const getDiscID = async () => {
     console.log("getDiscID() was called")
@@ -100,11 +112,26 @@ export default function Dashboard() {
     return data[0]["DiscID"];
   }
 
+  let navigate = useNavigate(); 
+  const routeChange = (newpath) =>{ 
+    let path = newpath; 
+    navigate(path);
+  }
+
   useEffect(() => {
     setDiscID("Loading...");
     setLoading(true);
     getDiscID()
       .then(x => setDiscID(x))
+      .catch(console.error);
+    setLoading(false);
+  }, [count]); 
+
+  useEffect(() => {
+    setUsername("Loading...");
+    setLoading(true);
+    get_username()
+      .then(x => setUsername(x))
       .catch(console.error);
     setLoading(false);
   }, [count]); 
@@ -174,7 +201,7 @@ export default function Dashboard() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
-            <Box>Logo</Box>
+            <Box>Ka.Y.E</Box>
             <HStack
               as={'nav'}
               spacing={4}
@@ -200,8 +227,8 @@ export default function Dashboard() {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem onClick={() => console.log('ok')}>Connections</MenuItem>
-                <MenuItem>Link 2</MenuItem>
+                {/* <MenuItem onClick={() => console.log('ok')}>Connections</MenuItem> */}
+                <MenuItem onClick={() => routeChange("/profile")}>Profile</MenuItem>
                 <MenuDivider />
                 <MenuItem onClick={signOut}>Sign Out</MenuItem>
               </MenuList>
@@ -220,8 +247,9 @@ export default function Dashboard() {
         ) : null}
       </Box>
 
-      <Box p={4}>Signed in as {user.email}</Box>
-      <Box p={4}>Discord UID: {discID}</Box>
+      {/* <Box p={4}>Signed in as {username}</Box>
+      <Box p={4}>Discord UID: {discID}</Box> */}
+      <Box p={4}>Events you're going for: {discID}</Box>
   <TableContainer>
   <Table variant='simple'>
     <TableCaption>There may be other events that you have not RSVP'd to!</TableCaption>
@@ -255,10 +283,10 @@ export default function Dashboard() {
    </Table>
   </TableContainer>
       <div>
-      <p>You refreshed {count} times</p>
-      <p>Loading status: {loading ? "True" : "False"}</p>
+      {/* <p>You refreshed {count} times</p>
+      <p>Loading status: {loading ? "True" : "False"}</p> */}
       <button onClick={() => setCount(count + 1)}>
-        Click me to refresh
+        Click me to refresh the page!
       </button>
     </div>
     </>

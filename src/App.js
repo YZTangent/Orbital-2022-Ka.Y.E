@@ -2,6 +2,7 @@ import './App.css';
 import Login from './Pages/Login'
 import Signup from'./Pages/Signup'
 import Dashboard from'./Pages/Dashboard'
+import Profile from'./Pages/Profile'
 import Front from './Pages/Front';
 import {
   BrowserRouter as Router,
@@ -46,6 +47,13 @@ function App() {
             path="/dashboard" element={
               <RequireAuth>
                 <Dashboard />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/profile" element={
+              <RequireAuth>
+                <Profile />
               </RequireAuth>
             }
           />
